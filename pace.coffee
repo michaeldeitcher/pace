@@ -256,12 +256,12 @@ class Bar
       else
         # r = circle.getAttribute('r')
         # c = Math.PI * r * 2
-        c = 126
+        c = 132
         if val < 0
           val = 0
         if val > 100
           val = 100
-        pct = 566 - (100 - val) / 100 * c
+        pct = 434 + (100 - val) / 100 * c
         circle.setAttribute 'style', "stroke-dashoffset: #{pct}px;"
 
     @lastRenderedProgress = @progress
