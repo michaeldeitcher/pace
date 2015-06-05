@@ -280,7 +280,7 @@
     };
 
     Bar.prototype.render = function() {
-      var c, circle, el, pct, r, val;
+      var c, circle, el, pct, val;
       if (document.querySelector(options.target) == null) {
         return false;
       }
@@ -291,15 +291,14 @@
         if (isNaN(val)) {
           val = 100;
         } else {
-          r = circle.getAttribute('r');
-          c = Math.PI * r * 2;
+          c = 126;
           if (val < 0) {
             val = 0;
           }
           if (val > 100) {
             val = 100;
           }
-          pct = (100 - val) / 100 * c;
+          pct = 566 - (100 - val) / 100 * c;
           circle.setAttribute('style', "stroke-dashoffset: " + pct + "px;");
         }
       }
