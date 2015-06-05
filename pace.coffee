@@ -261,7 +261,7 @@ class Bar
         if val > 100
           val = 100
         pct = (100 - val) / 100 * c
-        circle.setAttribute 'style', "strokeDashoffset: #{pct}px;"
+        circle.setAttribute 'style', "stroke-dashoffset: #{pct}px;"
 
     @lastRenderedProgress = @progress
 
