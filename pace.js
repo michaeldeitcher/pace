@@ -246,7 +246,7 @@
         this.el.className = "pace pace-active";
         document.body.className = document.body.className.replace(/pace-done/g, '');
         document.body.className += ' pace-running';
-        this.el.innerHTML = '<div class="pace-progress">\n  <div class="pace-progress-inner"></div>\n</div>\n<div class="pace-activity"></div>';
+        this.el.innerHTML = '<div class="pace-progress">\n  <svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">\n    <circle r="45" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>\n    <circle class="bar" r="45" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>\n  </svg>\n</div>\n<div class="pace-activity"></div>';
         if (targetElement.firstChild != null) {
           targetElement.insertBefore(this.el, targetElement.firstChild);
         } else {
@@ -280,20 +280,28 @@
     };
 
     Bar.prototype.render = function() {
-      var el, progressStr;
+      var c, circle, el, pct, r, val;
       if (document.querySelector(options.target) == null) {
         return false;
       }
       el = this.getElement();
       if (!this.lastRenderedProgress || this.lastRenderedProgress | 0 !== this.progress | 0) {
-        el.children[0].setAttribute('data-progress-text', (this.progress | 0) + "%");
-        if (this.progress >= 100) {
-          progressStr = '99';
+        val = this.progress;
+        circle = el.children[0].getElementsByClassName('bar')[0];
+        if (isNaN(val)) {
+          val = 100;
         } else {
-          progressStr = this.progress < 10 ? "0" : "";
-          progressStr += this.progress | 0;
+          r = circle.getAttribute('r');
+          c = Math.PI * r * 2;
+          if (val < 0) {
+            val = 0;
+          }
+          if (val > 100) {
+            val = 100;
+          }
+          pct = (100 - val) / 100 * c;
+          circle.setAttribute('style', "strokeDashoffset: " + pct);
         }
-        el.children[0].setAttribute('data-progress', "" + progressStr);
       }
       return this.lastRenderedProgress = this.progress;
     };

@@ -207,7 +207,10 @@ class Bar
 
       @el.innerHTML = '''
       <div class="pace-progress">
-        <div class="pace-progress-inner"></div>
+        <svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <circle r="45" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+          <circle class="bar" r="45" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+        </svg>
       </div>
       <div class="pace-activity"></div>
       '''
@@ -246,18 +249,19 @@ class Bar
     el = @getElement()
 
     if not @lastRenderedProgress or @lastRenderedProgress|0 != @progress|0
-      # The whole-part of the number has changed
-
-      el.children[0].setAttribute 'data-progress-text', "#{ @progress|0 }%"
-
-      if @progress >= 100
-        # We cap it at 99 so we can use prefix-based attribute selectors
-        progressStr = '99'
+      val = @progress
+      circle = el.children[0].getElementsByClassName('bar')[0]
+      if isNaN(val)
+        val = 100
       else
-        progressStr = if @progress < 10 then "0" else ""
-        progressStr += @progress|0
-
-      el.children[0].setAttribute 'data-progress', "#{ progressStr }"
+        r = circle.getAttribute('r')
+        c = Math.PI * r * 2
+        if val < 0
+          val = 0
+        if val > 100
+          val = 100
+        pct = (100 - val) / 100 * c
+        circle.setAttribute 'style', "strokeDashoffset: #{pct}"
 
     @lastRenderedProgress = @progress
 
