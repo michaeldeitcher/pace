@@ -208,8 +208,7 @@ class Bar
       @el.innerHTML = '''
       <div class="pace-progress">
         <svg id="svg" width="180" height="180" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <circle r="20" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
-          <circle class="bar" r="20" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+          <circle class="bar" r="20" cx="92" cy="80" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
         </svg>
       </div>
       <div class="pace-activity"></div>

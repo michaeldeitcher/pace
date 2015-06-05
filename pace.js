@@ -246,7 +246,7 @@
         this.el.className = "pace pace-active";
         document.body.className = document.body.className.replace(/pace-done/g, '');
         document.body.className += ' pace-running';
-        this.el.innerHTML = '<div class="pace-progress">\n  <svg id="svg" width="180" height="180" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">\n    <circle r="20" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>\n    <circle class="bar" r="20" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>\n  </svg>\n</div>\n<div class="pace-activity"></div>';
+        this.el.innerHTML = '<div class="pace-progress">\n  <svg id="svg" width="180" height="180" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">\n    <circle class="bar" r="20" cx="92" cy="80" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>\n  </svg>\n</div>\n<div class="pace-activity"></div>';
         if (targetElement.firstChild != null) {
           targetElement.insertBefore(this.el, targetElement.firstChild);
         } else {
